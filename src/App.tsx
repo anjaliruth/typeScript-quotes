@@ -1,8 +1,9 @@
 import "./App.css";
 import QuoteDisplay from "./components/QuoteDisplay";
 import { useState, createContext } from "react";
-import RecipeDisplay from "./components/RecipeDisplay";
-
+import RecipeDisplay from "./components/CocktailDisplay";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
 export interface Recipe {
   idDrink: string;
   strDrink: string;
@@ -57,36 +58,45 @@ export interface Recipe {
   dateModified?: string;
 }
 
+
 function App() {
   const [search, setSearch] = useState<string>("");
   const [spiritCategory, setSpiritCategory] = useState<string>("");
-  const [recipe, setRecipe] = useState<Recipe[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
+  const [result, setResult] = useState<Recipe[]>([]);
+  const [recipe, setRecipe] = useState<Recipe[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [test, setTest] = useState("")
 
   console.log(search);
   console.log(spiritCategory);
-  console.log(recipe)
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+  console.log(result);
+  console.log("recipe:", recipe);
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>):void {
     setSearch(e.target.value);
   }
 
-  function handleCategory(e: React.ChangeEvent<HTMLSelectElement>) {
-    setSpiritCategory(e.target.value);
+  function handleCategory(spirit:string):void {
+    setSpiritCategory(spirit);
   }
 
   return (
     <div className="App">
-      <h1>Cocktail Recipes</h1>
-      <input onChange={handleSearch} />
-      <select onChange={handleCategory}>
-        <option value="">Choose your spirit</option>
-        <option value="Rum">Rum</option>
-        <option value="Whisky">Whisky</option>
-        <option value="Vodka">Vodka</option>
-        <option value="Gin">Gin</option>
-      </select>
-      <RecipeDisplay search={search} spiritCategory={spiritCategory} setRecipe={setRecipe} recipe={recipe} isLoading={isLoading} setIsLoading={setIsLoading}/>
+     <Routes>
+
+     <Route path="/" element={<Home handleCategory={handleCategory} handleSearch={handleSearch} search={search} />} />
+
+     <Route path="/:spirit" element={<RecipeDisplay
+        search={search}
+        spiritCategory={spiritCategory}
+        setResult={setResult}
+        result={result}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        recipe={recipe}
+        setRecipe={setRecipe} />} /> 
+      </Routes>
+      
+    
     </div>
   );
 }

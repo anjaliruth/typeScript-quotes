@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { spirits } from "../App";
 interface HomeDisplayProps {
   search: string;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) =>void;
   handleCategory: (spirit:string)=>void;
 }
 export default function Home({handleSearch, search, handleCategory}: HomeDisplayProps) {
-  const spirits = ["Vodka", "Rum", "Whiskey", "Gin"];
+
   return (
     <div>
       <h1>Cocktail Recipes</h1>
@@ -16,7 +17,7 @@ export default function Home({handleSearch, search, handleCategory}: HomeDisplay
       {spirits.map((spirit, i) => {
         return (
           <div key={i}>
-            <Link to={ `/${spirit}`}>
+            <Link to={`/${spirit}/collection`}>
             <button
               key={spirit}
               value={spirit}

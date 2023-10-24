@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Recipe } from "../App";
 
 interface CocktailDisplayProps {
@@ -8,7 +8,7 @@ interface CocktailDisplayProps {
   setResult: React.Dispatch<React.SetStateAction<any>>;
   result: Recipe[];
   setRecipe: React.Dispatch<React.SetStateAction<any>>;
-  recipe: Recipe[];
+  recipe: Recipe;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
 }
@@ -23,7 +23,7 @@ export default function CocktailDisplay({
   recipe,
   setRecipe,
 }: CocktailDisplayProps) {
-  const {spirit} = useParams()
+  const {spirit, drink} = useParams()
   
   async function fetchRecipes(apiURL: string): Promise<void> {
     try {
@@ -36,7 +36,7 @@ export default function CocktailDisplay({
       setIsLoading(false);
     }
   }
-
+  console.log("SPIRIT", spirit)
   useEffect(() => {
     let apiURL = "";
     setIsLoading(true);
@@ -62,19 +62,24 @@ export default function CocktailDisplay({
     const data = await response.json();
     setRecipe(data.drinks[0]);
   }
+  
 
   return (
     <div>
 
-<h1>{spirit } Cocktails</h1>
+
+
+
+<h1>{spirit} Cocktails</h1>
       {isLoading && <p>Loading...</p>}
       {!isLoading &&
         result.map((cocktail, i) => {
           return (
-            <div className="" key={cocktail.idDrink}>
+            <div key={cocktail.idDrink}>
               <h2>{cocktail.strDrink}</h2>
               <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-              <button onClick={()=>fetchRecipeByID(cocktail.idDrink)}>View Recipe</button>
+             <Link to={`/${cocktail.strDrink}/recipe`} > <button onClick={()=>fetchRecipeByID(cocktail.idDrink)}>View Recipe</button>
+             </Link>
             </div>
           );
         })}

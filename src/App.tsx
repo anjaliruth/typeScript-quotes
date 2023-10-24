@@ -1,9 +1,9 @@
 import "./App.css";
-import QuoteDisplay from "./components/QuoteDisplay";
-import { useState, createContext } from "react";
-import RecipeDisplay from "./components/CocktailDisplay";
+import { useState } from "react";
+import RecipeDisplay from "./components/RecipeDisplay";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
+import CocktailDisplay from "./components/CocktailDisplay";
 export interface Recipe {
   idDrink: string;
   strDrink: string;
@@ -57,46 +57,64 @@ export interface Recipe {
   strCreativeCommonsConfirmed?: string;
   dateModified?: string;
 }
-
-
+export const spirits = ["Vodka", "Rum", "Whiskey", "Gin", "Tequila"];
 function App() {
   const [search, setSearch] = useState<string>("");
   const [spiritCategory, setSpiritCategory] = useState<string>("");
   const [result, setResult] = useState<Recipe[]>([]);
-  const [recipe, setRecipe] = useState<Recipe[]>([]);
+  const [recipe, setRecipe] = useState<Recipe>({} as Recipe);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [test, setTest] = useState("")
 
   console.log(search);
   console.log(spiritCategory);
   console.log(result);
   console.log("recipe:", recipe);
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>):void {
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>): void {
     setSearch(e.target.value);
   }
 
-  function handleCategory(spirit:string):void {
+  function handleCategory(spirit: string): void {
     setSpiritCategory(spirit);
   }
 
   return (
     <div className="App">
-     <Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              handleCategory={handleCategory}
+              handleSearch={handleSearch}
+              search={search}
+            />
+          }
+        />
 
-     <Route path="/" element={<Home handleCategory={handleCategory} handleSearch={handleSearch} search={search} />} />
+{recipe && (
+    <Route
+      path="/:drink/recipe"
+      element={<RecipeDisplay recipe={recipe} />}
+    />
+  )}
+        {/* window.location.href */}
 
-     <Route path="/:spirit" element={<RecipeDisplay
-        search={search}
-        spiritCategory={spiritCategory}
-        setResult={setResult}
-        result={result}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        recipe={recipe}
-        setRecipe={setRecipe} />} /> 
+        <Route
+          path="/:spirit/collection"
+          element={
+            <CocktailDisplay
+              search={search}
+              spiritCategory={spiritCategory}
+              setResult={setResult}
+              result={result}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              recipe={recipe}
+              setRecipe={setRecipe}
+            />
+          }
+        />
       </Routes>
-      
-    
     </div>
   );
 }

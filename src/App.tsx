@@ -88,6 +88,13 @@ function App() {
               handleCategory={handleCategory}
               handleSearch={handleSearch}
               search={search}
+              spiritCategory={spiritCategory}
+              setResult={setResult}
+              result={result}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              recipe={recipe}
+              setRecipe={setRecipe}
             />
           }
         />

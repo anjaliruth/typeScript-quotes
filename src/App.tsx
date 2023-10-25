@@ -56,6 +56,7 @@ export interface Recipe {
   strImageAttribution?: string;
   strCreativeCommonsConfirmed?: string;
   dateModified?: string;
+  [key: string]: string | null | undefined;
 }
 export const spirits = ["Vodka", "Rum", "Whiskey", "Gin", "Tequila"];
 function App() {
@@ -91,13 +92,12 @@ function App() {
           }
         />
 
-{recipe && (
-    <Route
-      path="/:drink/recipe"
-      element={<RecipeDisplay recipe={recipe} />}
-    />
-  )}
-        {/* window.location.href */}
+        {recipe && (
+          <Route
+            path="/:drink/recipe"
+            element={<RecipeDisplay recipe={recipe} />}
+          />
+        )}
 
         <Route
           path="/:spirit/collection"

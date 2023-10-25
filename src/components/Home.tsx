@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { spirits } from "../App";
+import CocktailDisplay from "./CocktailDisplay";
 interface HomeDisplayProps {
   search: string;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) =>void;
@@ -26,6 +27,8 @@ export default function Home({handleSearch, search, handleCategory}: HomeDisplay
               {spirit}
             </button>
             </Link>
+
+           
           </div>
         );
       })}

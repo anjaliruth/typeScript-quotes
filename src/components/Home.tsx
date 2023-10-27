@@ -14,6 +14,8 @@ interface HomeDisplayProps {
   recipe: Recipe;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  fetchRecipes: (apiURL: string) => Promise<void>
+  handleAPIURL : () => void
 }
 export default function Home({
   handleSearch,
@@ -26,15 +28,30 @@ export default function Home({
   isLoading,
   recipe,
   setRecipe,
+ handleAPIURL
 }: HomeDisplayProps) {
+
+  async function fetchRecipesBySearch(): Promise<void> {
+    try {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
+      const data: any = await response.json();
+      setResult(data.drinks);
+    } catch (e) {
+      console.error("Error fetching results:", e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+console.log("Search", search)
   return (
     <div>
       <h1 className="my-2 font-bold text-center text-3xl">Cocktail Recipes</h1>
 
       <div className="">
         <input value={search} onChange={handleSearch} />
-        <Link to={`/search/${search}/recipe`}>
-          <button >
+        <Link to={`/search/${search}`}>
+          <button onClick={fetchRecipesBySearch}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

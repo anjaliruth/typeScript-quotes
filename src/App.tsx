@@ -77,7 +77,39 @@ function App() {
   function handleCategory(spirit: string): void {
     setSpiritCategory(spirit);
   }
-  
+
+  async function fetchRecipes(apiURL: string): Promise<void> {
+    try {
+      const response = await fetch(apiURL);
+      const data: any = await response.json();
+      setResult(data.drinks);
+    } catch (e) {
+      console.error("Error fetching results:", e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleAPIURl() {
+    let apiURL = "";
+    setIsLoading(true);
+    if (spiritCategory) {
+      apiURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${spiritCategory}`;
+    } 
+    // else if (search) {
+    //   apiURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
+    // }
+
+    if (apiURL) {
+      fetchRecipes(apiURL);
+    } else {
+      // q: If we dont add the line below, we stil get api results after clearing the input field.
+      setResult([]);
+      setIsLoading(false);
+    }
+  }
+
+
 
   return (
     <div className="App">
@@ -92,6 +124,8 @@ function App() {
         setIsLoading={setIsLoading}
         recipe={recipe}
         setRecipe={setRecipe}
+        fetchRecipes={fetchRecipes}
+        handleAPIURL={handleAPIURl}
       />
       <Routes>
         {recipe && (
@@ -99,33 +133,43 @@ function App() {
             path="/:drink/recipe"
             element={<RecipeDisplay recipe={recipe} />}
           />
-
         )}
 
-{recipe && (
+       
           <Route
-            path="search/:drink/recipe"
-            element={<RecipeDisplay recipe={recipe} />}
+            path="search/:drink"
+            element={ <CocktailDisplay
+              search={search}
+              spiritCategory={spiritCategory}
+              setResult={setResult}
+              result={result}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              recipe={recipe}
+              setRecipe={setRecipe}
+              fetchRecipes={fetchRecipes}
+              handleAPIURL={handleAPIURl}
+            />}
           />
+ 
 
-        )}
-
-          <Route
-            path="/:spirit/collection"
-            element={
-              <CocktailDisplay
-                search={search}
-                spiritCategory={spiritCategory}
-                setResult={setResult}
-                result={result}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                recipe={recipe}
-                setRecipe={setRecipe}
-              />
-            }
-          />
-
+        <Route
+          path="/:spirit/collection"
+          element={
+            <CocktailDisplay
+              search={search}
+              spiritCategory={spiritCategory}
+              setResult={setResult}
+              result={result}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              recipe={recipe}
+              setRecipe={setRecipe}
+              fetchRecipes={fetchRecipes}
+              handleAPIURL={handleAPIURl}
+            />
+          }
+        />
       </Routes>
     </div>
   );

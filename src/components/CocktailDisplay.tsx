@@ -11,6 +11,8 @@ interface CocktailDisplayProps {
   recipe: Recipe;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  fetchRecipes: (apiURL: string) => Promise<void>
+  handleAPIURL : () => void
 }
 
 export default function CocktailDisplay({
@@ -22,37 +24,15 @@ export default function CocktailDisplay({
   isLoading,
   recipe,
   setRecipe,
+  fetchRecipes, 
+  handleAPIURL
 }: CocktailDisplayProps) {
   const {spirit, drink} = useParams()
   
-  async function fetchRecipes(apiURL: string): Promise<void> {
-    try {
-      const response = await fetch(apiURL);
-      const data: any = await response.json();
-      setResult(data.drinks);
-    } catch (e) {
-      console.error("Error fetching results:", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+
   console.log("SPIRIT", spirit)
   useEffect(() => {
-    let apiURL = "";
-    setIsLoading(true);
-    if (spiritCategory) {
-      apiURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${spiritCategory}`;
-    } else if (search) {
-      apiURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
-    }
-
-    if (apiURL) {
-      fetchRecipes(apiURL);
-    } else {
-        // q: If we dont add the line below, we stil get api results after clearing the input field. 
-        setResult([])
-      setIsLoading(false);
-    }
+handleAPIURL()
   }, [spiritCategory, search]);
 
   async function fetchRecipeByID(idDrink: string): Promise<void> {

@@ -43,24 +43,26 @@ fetchRecipesByCategory()
   
 
   return (
-    <div>
+    <div className=" bg-pink-200">
 
 
 
 
 <h1>{spirit} Cocktails</h1>
       {isLoading && <p>Loading...</p>}
+      <div className="grid grid-cols-3 m-auto bg-purple-400 gap-4 place-items-center w-4/5">
       {!isLoading &&
         result.map((cocktail, i) => {
           return (
-            <div key={cocktail.idDrink}>
-              <h2>{cocktail.strDrink}</h2>
-              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-             <Link to={`/${cocktail.strDrink}/recipe`} > <button onClick={()=>fetchRecipeByID(cocktail.idDrink)}>View Recipe</button>
+            <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-blue-200 gap-4 rounded-[10px]">
+              <h2 className="text-xl font-bold">{cocktail.strDrink}</h2>
+              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-3/5 max-lg rounded-[15px] "/>
+             <Link to={`/${cocktail.strDrink}/recipe`} > <button onClick={()=>fetchRecipeByID(cocktail.idDrink)} className="mb-3 p-2 rounded bg-green-200">🍸 View Recipe</button>
              </Link>
             </div>
           );
         })}
+        </div>
     </div>
   );
 }

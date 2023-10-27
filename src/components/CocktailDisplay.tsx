@@ -11,8 +11,7 @@ interface CocktailDisplayProps {
   recipe: Recipe;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
-  fetchRecipes: (apiURL: string) => Promise<void>
-  handleAPIURL : () => void
+  fetchRecipesByCategory:() => Promise<void>
 }
 
 export default function CocktailDisplay({
@@ -24,16 +23,15 @@ export default function CocktailDisplay({
   isLoading,
   recipe,
   setRecipe,
-  fetchRecipes, 
-  handleAPIURL
+  fetchRecipesByCategory, 
 }: CocktailDisplayProps) {
   const {spirit, drink} = useParams()
   
 
   console.log("SPIRIT", spirit)
   useEffect(() => {
-handleAPIURL()
-  }, [spiritCategory, search]);
+fetchRecipesByCategory()
+  }, [spiritCategory]);
 
   async function fetchRecipeByID(idDrink: string): Promise<void> {
     const response = await fetch(

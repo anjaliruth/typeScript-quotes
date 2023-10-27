@@ -78,9 +78,9 @@ function App() {
     setSpiritCategory(spirit);
   }
 
-  async function fetchRecipes(apiURL: string): Promise<void> {
+  async function fetchRecipesByCategory(): Promise<void> {
     try {
-      const response = await fetch(apiURL);
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${spiritCategory}`);
       const data: any = await response.json();
       setResult(data.drinks);
     } catch (e) {
@@ -90,26 +90,18 @@ function App() {
     }
   }
 
-  function handleAPIURl() {
-    let apiURL = "";
-    setIsLoading(true);
-    if (spiritCategory) {
-      apiURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${spiritCategory}`;
-    } 
-    // else if (search) {
-    //   apiURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
-    // }
-
-    if (apiURL) {
-      fetchRecipes(apiURL);
-    } else {
-      // q: If we dont add the line below, we stil get api results after clearing the input field.
-      setResult([]);
+  async function fetchRecipesBySearch(): Promise<void> {
+    try {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
+      const data: any = await response.json();
+      setResult(data.drinks);
+    } catch (e) {
+      console.error("Error fetching results:", e);
+    } finally {
       setIsLoading(false);
+      setSearch("")
     }
   }
-
-
 
   return (
     <div className="App">
@@ -124,8 +116,7 @@ function App() {
         setIsLoading={setIsLoading}
         recipe={recipe}
         setRecipe={setRecipe}
-        fetchRecipes={fetchRecipes}
-        handleAPIURL={handleAPIURl}
+        fetchRecipesBySearch={fetchRecipesBySearch}
       />
       <Routes>
         {recipe && (
@@ -147,8 +138,8 @@ function App() {
               setIsLoading={setIsLoading}
               recipe={recipe}
               setRecipe={setRecipe}
-              fetchRecipes={fetchRecipes}
-              handleAPIURL={handleAPIURl}
+              fetchRecipesByCategory={fetchRecipesByCategory}
+
             />}
           />
  
@@ -165,8 +156,8 @@ function App() {
               setIsLoading={setIsLoading}
               recipe={recipe}
               setRecipe={setRecipe}
-              fetchRecipes={fetchRecipes}
-              handleAPIURL={handleAPIURl}
+              fetchRecipesByCategory={fetchRecipesByCategory}
+      
             />
           }
         />

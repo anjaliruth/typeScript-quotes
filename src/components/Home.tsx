@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { Link } from "react-router-dom";
 import { spirits } from "../App";
 import CocktailDisplay from "./CocktailDisplay";
@@ -14,8 +14,7 @@ interface HomeDisplayProps {
   recipe: Recipe;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
-  fetchRecipes: (apiURL: string) => Promise<void>
-  handleAPIURL : () => void
+  fetchRecipesBySearch: ()=> Promise<void>
 }
 export default function Home({
   handleSearch,
@@ -28,20 +27,10 @@ export default function Home({
   isLoading,
   recipe,
   setRecipe,
- handleAPIURL
+  fetchRecipesBySearch
 }: HomeDisplayProps) {
 
-  async function fetchRecipesBySearch(): Promise<void> {
-    try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
-      const data: any = await response.json();
-      setResult(data.drinks);
-    } catch (e) {
-      console.error("Error fetching results:", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+
 
 console.log("Search", search)
   return (

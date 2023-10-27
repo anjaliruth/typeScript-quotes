@@ -77,50 +77,55 @@ function App() {
   function handleCategory(spirit: string): void {
     setSpiritCategory(spirit);
   }
+  
 
   return (
     <div className="App">
+      <Home
+        handleCategory={handleCategory}
+        handleSearch={handleSearch}
+        search={search}
+        spiritCategory={spiritCategory}
+        setResult={setResult}
+        result={result}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        recipe={recipe}
+        setRecipe={setRecipe}
+      />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              handleCategory={handleCategory}
-              handleSearch={handleSearch}
-              search={search}
-              spiritCategory={spiritCategory}
-              setResult={setResult}
-              result={result}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              recipe={recipe}
-              setRecipe={setRecipe}
-            />
-          }
-        />
-
         {recipe && (
           <Route
             path="/:drink/recipe"
             element={<RecipeDisplay recipe={recipe} />}
           />
+
         )}
 
-        <Route
-          path="/:spirit/collection"
-          element={
-            <CocktailDisplay
-              search={search}
-              spiritCategory={spiritCategory}
-              setResult={setResult}
-              result={result}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              recipe={recipe}
-              setRecipe={setRecipe}
-            />
-          }
-        />
+{recipe && (
+          <Route
+            path="search/:drink/recipe"
+            element={<RecipeDisplay recipe={recipe} />}
+          />
+
+        )}
+
+          <Route
+            path="/:spirit/collection"
+            element={
+              <CocktailDisplay
+                search={search}
+                spiritCategory={spiritCategory}
+                setResult={setResult}
+                result={result}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                recipe={recipe}
+                setRecipe={setRecipe}
+              />
+            }
+          />
+
       </Routes>
     </div>
   );

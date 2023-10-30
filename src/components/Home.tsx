@@ -39,11 +39,11 @@ export default function Home({
           <input
             value={search}
             onChange={handleSearch}
-            placeholder="Search cocktail"
-            className="py-1 rounded ml-10"
+            placeholder="🍸Search cocktail"
+            className="py-1 rounded ml-10 text-center"
           />
           <Link to={`/search/${search}`}>
-            <button onClick={fetchRecipesBySearch}>
+            <button onClick={fetchRecipesBySearch} className=" p-1 rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,7 +62,7 @@ export default function Home({
           </Link>
         </div>
 
-        <div className=" flex  py-3 space-x-20 mx-auto px-0 bg-green-500">
+        <div className=" flex  py-3 mx-auto px-0 bg-green-500">
           {spirits.map((spirit, i) => {
             return (
               <div key={i} className="">

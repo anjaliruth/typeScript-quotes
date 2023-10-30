@@ -46,7 +46,7 @@ export default function CocktailDisplay({
       <h1 className="text-3xl font-bold text-center p-5">{spirit} Cocktails</h1>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <span className="loader"></span>
       ) : result && result.length > 0 ? (
         <div className="grid grid-cols-3 m-auto bg-purple-400 gap-4 place-items-center w-4/5">
           {result.map((cocktail, i) => (

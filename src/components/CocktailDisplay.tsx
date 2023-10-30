@@ -52,7 +52,7 @@ fetchRecipesByCategory()
 
       {isLoading && <p>Loading...</p>}
       <div className="grid grid-cols-3 m-auto bg-purple-400 gap-4 place-items-center w-4/5">
-      {!isLoading &&
+      {!isLoading && 
         result.map((cocktail, i) => {
           return (
             <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-blue-200 gap-4 rounded-[10px]">

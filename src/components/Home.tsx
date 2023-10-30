@@ -35,12 +35,12 @@ export default function Home({
       <h1 className="my-2 font-bold text-center text-3xl">Cocktail Recipes</h1>
 
       <div className=" flex bg-red-500 space-x-200" >
-        <div className=" bg-yellow-700 items-center ">
+        <div className="flex items-center gap-2 bg-yellow-700 ">
           <input
             value={search}
             onChange={handleSearch}
             placeholder="Search cocktail"
-            className="border-blue-500 ml-10"
+            className="py-1 rounded ml-10"
           />
           <Link to={`/search/${search}`}>
             <button onClick={fetchRecipesBySearch}>

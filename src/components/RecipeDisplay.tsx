@@ -27,17 +27,22 @@ export default function RecipeDisplay({ recipe }: RecipeDisplayProps) {
   }
 
   return (
-    <div>
-      <h1>{recipe.strDrink}</h1>
-      <img src={recipe.strDrinkThumb} alt={recipe.strDrink} />
-
-      <h1>Ingredients:</h1>
+    <div className="flex flex-col items-center w-2/5 m-auto">
+      <h1 className="text-2xl font-bold p-5">{recipe.strDrink}</h1>
+      <img
+        className="w-3/5 border-radius-5"
+        src={recipe.strDrinkThumb}
+        alt={recipe.strDrink}
+      />
+      <div className="">
+      <h1 className="text-2xl font-bold py-5">Ingredients:</h1>
       {ingredientsAndMeasures}
-
-      <h1>Instructions:</h1>
-      {recipe.strInstructions}
-
-      <p>Glass to use: {recipe.strGlass}</p>
+      <h1 className="text-2xl font-bold py-5">Instructions:</h1>
+      <p> {recipe.strInstructions}</p>
+     
+      <h1 className="text-2xl font-bold py-5">Glass to use:</h1>
+      <p className="pb-5">{recipe.strGlass}</p>
+    </div>
     </div>
   );
 }

@@ -2,7 +2,8 @@ import "./App.css";
 import { useState } from "react";
 import RecipeDisplay from "./components/RecipeDisplay";
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
+import NavBar from "./components/NavBar";
+import HomePage from "./components/HomePage";
 import CocktailDisplay from "./components/CocktailDisplay";
 export interface Recipe {
   idDrink: string;
@@ -105,7 +106,7 @@ function App() {
 
   return (
     <div className="App">
-      <Home
+      <NavBar
         handleCategory={handleCategory}
         handleSearch={handleSearch}
         search={search}
@@ -119,6 +120,9 @@ function App() {
         fetchRecipesBySearch={fetchRecipesBySearch}
       />
       <Routes>
+
+<Route path="/" element={<HomePage/>}/>
+
         {recipe && (
           <Route
             path="/:drink/recipe"

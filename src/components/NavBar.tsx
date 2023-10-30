@@ -16,7 +16,7 @@ interface HomeDisplayProps {
   isLoading: boolean;
   fetchRecipesBySearch: () => Promise<void>;
 }
-export default function Home({
+export default function NavBar({
   handleSearch,
   search,
   handleCategory,
@@ -34,13 +34,13 @@ export default function Home({
     <div>
       <h1 className="my-2 font-bold text-center text-3xl">Cocktail Recipes</h1>
 
-      <div className=" flex bg-red-500 space-x-200" >
-        <div className="flex items-center gap-2 bg-yellow-700 ">
+      <div className="flex bg-red-900 justify-between" >
+        <div className="flex items-center ">
           <input
             value={search}
             onChange={handleSearch}
             placeholder="🍸Search cocktail"
-            className="py-1 rounded ml-10 text-center"
+            className="py-1 rounded ml-10"
           />
           <Link to={`/search/${search}`}>
             <button onClick={fetchRecipesBySearch} className=" p-1 rounded">
@@ -62,7 +62,7 @@ export default function Home({
           </Link>
         </div>
 
-        <div className=" flex  py-3 mx-auto px-0 bg-green-500">
+        <div className=" flex px-0">
           {spirits.map((spirit, i) => {
             return (
               <div key={i} className="">
@@ -71,9 +71,7 @@ export default function Home({
                     key={spirit}
                     value={spirit}
                     onClick={() => handleCategory(spirit)}
-                    className={`text-white border-l px-5 border-red-500 hover:bg-pink-400  ${
-                      i === spirits.length - 1 ? "border-r" : ""
-                    }`}
+                    className={`text-white border-l px-5 py-2 border-solid border-red-500 hover:bg-pink-400`}
                   >
                     {spirit}
                   </button>

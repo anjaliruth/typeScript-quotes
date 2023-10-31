@@ -28,20 +28,21 @@ export default function RecipeDisplay({ recipe }: RecipeDisplayProps) {
 
   return (
     <div className="flex flex-col items-center w-2/5 m-auto">
-      <h1 className="text-2xl font-bold p-5">{recipe.strDrink}</h1>
+      <h1 className="text-2xl font-bold p-5 text-white">{recipe.strDrink}</h1>
       <img
         className="w-3/5 border-radius-5"
         src={recipe.strDrinkThumb}
         alt={recipe.strDrink}
       />
       <div className="">
-      <h1 className="text-2xl font-bold py-5">Ingredients:</h1>
-      {ingredientsAndMeasures}
-      <h1 className="text-2xl font-bold py-5">Instructions:</h1>
-      <p> {recipe.strInstructions}</p>
+      <h1 className="text-2xl font-bold py-5 text-white">Ingredients:</h1>
+      <p className="text-white">    {ingredientsAndMeasures}</p>
+  
+      <h1 className="text-2xl font-bold py-5 text-white">Instructions:</h1>
+      <p className="text-white"> {recipe.strInstructions}</p>
      
-      <h1 className="text-2xl font-bold py-5">Glass to use:</h1>
-      <p className="pb-5">{recipe.strGlass}</p>
+      <h1 className="text-2xl font-bold py-5 text-white">Glass to use:</h1>
+      <p  className="text-white pb-5">{recipe.strGlass}</p>
     </div>
     </div>
   );

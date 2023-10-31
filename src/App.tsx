@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { useState } from "react";
 import RecipeDisplay from "./components/RecipeDisplay";
 import { Route, Routes } from "react-router-dom";
@@ -105,7 +105,7 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-900 h-100 w-100">
+    <div className="bg-gray-900 h-[150vh]">
       <NavBar
         handleCategory={handleCategory}
         handleSearch={handleSearch}

@@ -50,13 +50,13 @@ export default function CocktailDisplay({
       ) : result && result.length > 0 ? (
         <div className="grid grid-cols-3 m-auto gap-10 place-items-center w-3/5 text-center pb-10">
           {result.map((cocktail, i) => (
-            <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-blue-200 gap-4 rounded-[10px] h-[400px]">
+            <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-grid-yellow gap-4 rounded-[10px] h-[400px]">
               <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-5/5 max-lg  rounded-[8px] " />
               <div className="flex items-center h-[100px]">
-              <h2 className="text-xl font-bold">{cocktail.strDrink}</h2>
+              <h2 className="text-xl font-bold text-oxford-blue">{cocktail.strDrink}</h2>
               </div>
               <Link to={`/${cocktail.strDrink}/recipe`}>
-                <button onClick={() => fetchRecipeByID(cocktail.idDrink)} className="mb-3 p-2 rounded bg-green-200">
+                <button onClick={() => fetchRecipeByID(cocktail.idDrink)} className="mb-3 p-2 rounded bg-dark-green text-white">
                   🍸 View Recipe
                 </button>
               </Link>
@@ -64,7 +64,9 @@ export default function CocktailDisplay({
           ))}
         </div>
       ) : (
-        <p className=" text-2xl text-center font-medium">☹️ Sorry! No such cocktail found.</p>
+        <div className=" text-2xl text-center font-bold text-white my-10">
+          ERROR 
+        <h2 className="text-2xl text-center font-medium text-white pt-5">☹️ Sorry! No such cocktail found.</h2></div>
       )}
     </div>
   );

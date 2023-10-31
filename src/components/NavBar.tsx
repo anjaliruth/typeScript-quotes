@@ -34,7 +34,7 @@ export default function NavBar({
     <div>
       <h1 className="py-5 font-bold text-center text-3xl text-white"> Drink o' Clock! 🥂</h1>
 
-      <div className="flex bg-red-900 justify-between" >
+      <div className="flex bg-sky-blue justify-between" >
         <div className="flex items-center ">
           <input
             value={search}

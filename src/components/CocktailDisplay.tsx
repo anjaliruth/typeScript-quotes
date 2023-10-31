@@ -42,17 +42,19 @@ export default function CocktailDisplay({
   }
 
   return (
-    <div className=" bg-pink-200">
-      <h1 className="text-3xl font-bold text-center p-5">{spirit} Cocktails</h1>
+    <div className=" bg-gray-900">
+      <h1 className="text-3xl font-bold text-center p-5 text-white">{spirit} Cocktails</h1>
 
       {isLoading ? (
         <span className="loader"></span>
       ) : result && result.length > 0 ? (
-        <div className="grid grid-cols-3 m-auto bg-purple-400 gap-4 place-items-center w-4/5">
+        <div className="grid grid-cols-3 m-auto gap-10 place-items-center w-3/5 text-center pb-10">
           {result.map((cocktail, i) => (
-            <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-blue-200 gap-4 rounded-[10px]">
+            <div key={cocktail.idDrink} className="flex flex-col items-center p-2 bg-blue-200 gap-4 rounded-[10px] h-[400px]">
+              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-5/5 max-lg  rounded-[8px] " />
+              <div className="flex items-center h-[100px]">
               <h2 className="text-xl font-bold">{cocktail.strDrink}</h2>
-              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-3/5 max-lg rounded-[15px] " />
+              </div>
               <Link to={`/${cocktail.strDrink}/recipe`}>
                 <button onClick={() => fetchRecipeByID(cocktail.idDrink)} className="mb-3 p-2 rounded bg-green-200">
                   🍸 View Recipe

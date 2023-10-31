@@ -32,7 +32,7 @@ export default function NavBar({
   console.log("Search", search);
   return (
     <div>
-      <h1 className="my-2 font-bold text-center text-3xl">Cocktail Recipes</h1>
+      <h1 className="py-5 font-bold text-center text-3xl text-white"> Drink o' Clock! 🥂</h1>
 
       <div className="flex bg-red-900 justify-between" >
         <div className="flex items-center ">

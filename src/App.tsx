@@ -105,7 +105,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="bg-gray-900 h-100 w-100">
       <NavBar
         handleCategory={handleCategory}
         handleSearch={handleSearch}
